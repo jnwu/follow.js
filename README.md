@@ -103,13 +103,14 @@ Include jQuery > 1.7.2, and include the jquery.thingbroker.min.js plugin. For ex
 
 ```
 <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="jquery.thingbroker.min.js"></script>
+<script type="text/javascript" src="jquery.thingbroker-0.3.0.min.js"></script>
 ```
 
 If you want to be up-to-date without needing to worry about updates within your applications you can use our NON-CDN version of the jquery plugin (below), which is always kept up to date. This version depends on the thingbroker instance running in kimberly.magic.ubc.ca:8080/thingbroker.
 
 ```
-<script type="text/javascript" src="http://kimberly.magic.ubc.ca:8080/thingbroker/resources/jquery-plugin/jquery.thingbroker.min.js"></script>
+<script type="text/javascript" src="http://kimberly.magic.ubc.ca:8080/thingbroker/resources/jquery-plugin/jquery.thingbroker-0.3.0.min.js"></script>
+<script type="text/javascript" src="http://kimberly.magic.ubc.ca:8080/thingbroker/resources/jquery-plugin/jquery-1.7.2.min.js"></script>
 ```
 
 ## JQUERY MANIPULATIONS API
@@ -162,7 +163,9 @@ To follow a thing you can use the function:
 The following raw-methods are provided:
 
 ```
-$.ThingBroker({url: "http:yourownserver/thingbroker"}).postThing("thingId")
+$.ThingBroker({url: "http:yourownserver/thingbroker"}).postThingById("thingId")
+$.ThingBroker().postThing({thingId: "name"})
+$.ThingBroker().deleteThing("thingId")
 $.ThingBroker().postEvent("thingId", {key:value})
 $.ThingBroker().putEvent("eventId", "serverTimestamp", {key:value}) #UNRELEASED: WILL CHANGE!
 $.ThingBroker().getEvents("thingId")
