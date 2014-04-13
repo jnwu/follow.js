@@ -34,25 +34,29 @@ var url = 'http://localhost:3000';
           );
         }
 
-        get(params.name);
+        get(params);
       } else create(params);
     }); 
 
-    function get(name) {
+    function get(params) {
       $.ajax({
         type: "GET",
         crossDomain: true,
-        url: url+"/thing/"+name+"/events",
+        url: url+"/thing/"+params.name+"/events?limit=1",
         dataType: "JSON",   
         success: function(json) {
-          update(json, name);
+          update(json, params);
         }
       });    
     }
 
-    function update(json, name) {
-      console.log(json);
-      setTimeout(function(){ get(name); }, 250);
+    function update(json, params) {
+      if (params.callback) {
+        var cb = params.callback;
+        cb(json);        
+      }
+
+      setTimeout(function(){ get(params); }, 250);
     }
 
     function post(url, data) {
