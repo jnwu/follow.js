@@ -42,7 +42,7 @@ var url = 'http://localhost:3000';
       $.ajax({
         type: "GET",
         crossDomain: true,
-        url: url+"/thing/"+params.name+"/events?limit=1",
+        url: url+"/thing/"+params.name+"/events?limit=1&after="+params.timestamp,
         dataType: "JSON",   
         success: function(json) {
           update(json, params);
@@ -51,6 +51,7 @@ var url = 'http://localhost:3000';
     }
 
     function update(json, params) {
+      if (json.length > 0) { params.timestamp = (new Date(json[0].created)).getTime(); }
       if (params.callback) {
         var cb = params.callback;
         cb(json);        
